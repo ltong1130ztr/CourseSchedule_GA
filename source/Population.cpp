@@ -201,9 +201,11 @@ void Population::update_group_fitness()
 	for (int i = 0; i < len; ++i)
 	{
 		_chromosome = _chromosome_base[i];
-		group_fitness[i] = get_fitness_score();
-		//parallel version
-		//group_fitness[i] = get_fitness_score_parallel();
+		//group_fitness[i] = get_fitness_score(); // single thread
+
+		// using multiple threads to calculate violations of each constraint
+		group_fitness[i] = get_fitness_score_multithread(); 
+		
 	}
 	return;
 }
